@@ -4,7 +4,7 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override= False)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,7 +17,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS',
-    '127.0.0.1,localhost,.up.railway.app'
+    '127.0.0.1,localhost,.up.railway.app,.onrender.com'
 ).split(',')
 
 INSTALLED_APPS = [
@@ -71,8 +71,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASE_URL = os.environ.get('MYSQL_URL')
 
 if DATABASE_URL:
+    # Limpia ?ssl-mode=REQUIRED de Aiven para evitar error en mysqlclient
+    clean_url = DATABASE_URL.split('?')[0]
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        'default': dj_database_url.parse(clean_url)
     }
 else:
     DATABASES = {
