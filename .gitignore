@@ -1,0 +1,23 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variables de entorno y contraseñas (CRÍTICO)
+.env
+.env.*
+
+# Bases de datos locales y estáticos generados
+db.sqlite3
+staticfiles/
+media/
+
+# Carpetas de editores / sistema
+.vscode/
+.idea/
+.DS_Store
